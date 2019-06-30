@@ -15,7 +15,9 @@ pipeline {
         }
         stage('docker') {
             steps {
-                sh "docker build -t helloworld HelloWorld"
+                sh "docker image build -t helloworld HelloWorld"
+                sh "docker tag helloworld lenovo:5000/helloworld"
+                sh "docker push lenovo:5000/helloworld"
             }
         }
     }
