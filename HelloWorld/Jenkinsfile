@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'java:8'
-        }
-    }
+    agent any
     stages {
         stage('checkout') {
             steps {
