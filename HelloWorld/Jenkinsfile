@@ -20,6 +20,11 @@ pipeline {
                 sh "docker push lenovo:5000/helloworld"
             }
         }
+        stage('staging test') {
+            steps {
+                sh "docker container run --rm lenovo:5000/helloworld"
+            }
+        }
     }
 }
 
