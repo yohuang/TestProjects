@@ -1,0 +1,31 @@
+pipeline {
+    agent {
+        docker {
+            image 'openjdk:8-jdk-alpine'
+        }
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git url: 'https://github.com/yohuang/TestProjects.git'
+            }
+        }
+        stage('compile') {
+            steps {
+                sh "apache-ant-1.10.6/bin/ant -f HelloWorld/build.xml clean"
+                sh "apache-ant-1.10.6/bin/ant -f HelloWorld/build.xml compile"
+            }
+        }
+        stage('package') {
+            steps {
+                sh "apache-ant-1.10.6/bin/ant -f HelloWorld/build.xml jar"
+            }
+        }
+        stage('run') {
+            steps {
+                sh "apache-ant-1.10.6/bin/ant -f HelloWorld/build.xml run"
+            }
+        }
+    }
+}
+
