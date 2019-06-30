@@ -17,9 +17,9 @@ pipeline {
                 sh "apache-ant-1.10.6/bin/ant -f HelloWorld/build.xml jar"
             }
         }
-        stage('test') {
+        stage('docker') {
             steps {
-                sh "apache-ant-1.10.6/bin/ant -f HelloWorld/build.xml run"
+                sh "docker build -t helloworld HelloWorld"
             }
         }
     }
