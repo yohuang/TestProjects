@@ -1,0 +1,7 @@
+version: "3"
+services:
+  helloworld:
+    build: .
+
+  redis:
+    image: redis:latest
