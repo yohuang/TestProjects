@@ -15,15 +15,18 @@ pipeline {
         }
         stage('docker') {
             steps {
-                sh "docker image build -t helloworld HelloWorld"
-                sh "docker tag helloworld lenovo:5000/helloworld"
-                sh "docker push lenovo:5000/helloworld"
+                sh "docker-compose -f HelloWorld/docker-compose.yml build"
             }
         }
-        stage('staging test') {
+        stage('test') {
             steps {
-                sh "docker container run --rm lenovo:5000/helloworld"
+                sh "docker-compose -f HelloWorld/docker-compose.yml up -d"
             }
+        }
+    }
+    post {
+        always {
+            sh "docker-compose -f HelloWorld/docker-compose.yml down"
         }
     }
 }
